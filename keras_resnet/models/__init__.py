@@ -17,6 +17,11 @@ from ._2d import (
     ResNet200
 )
 
+from ._1d import (
+    ResNet1d,
+    ResNet18_1d
+)
+
 from ._time_distributed_2d import (
     TimeDistributedResNet,
     TimeDistributedResNet18,

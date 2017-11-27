@@ -15,3 +15,7 @@ from ._2d import (
     ResNet152,
     ResNet200
 )
+
+from ._1d import (
+    ResNet18_1d
+)
