@@ -5,6 +5,7 @@ class BatchNormalization(keras.layers.BatchNormalization):
     """
     Identical to keras.layers.BatchNormalization, but adds the option to freeze parameters.
     """
+
     def __init__(self, freeze, *args, **kwargs):
         self.freeze = freeze
         super(BatchNormalization, self).__init__(*args, **kwargs)
@@ -17,4 +18,6 @@ class BatchNormalization(keras.layers.BatchNormalization):
         return super(BatchNormalization, self).call(training=(not self.freeze), *args, **kwargs)
 
     def get_config(self):
-        return {'freeze': self.freeze}
+        config = super(BatchNormalization, self).get_config()
+        config.update({'freeze': self.freeze})
+        return config
