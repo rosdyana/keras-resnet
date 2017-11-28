@@ -41,7 +41,7 @@ def ResNet1d(inputs, blocks, block, include_top=True, classes=1000, freeze_bn=Tr
         >>> import keras_resnet.blocks
         >>> import keras_resnet.models
 
-        >>> shape, classes = (224, 224, 3), 1000
+        >>> shape, classes = (1, 5), 1
 
         >>> x = keras.layers.Input(shape)
 
@@ -64,19 +64,20 @@ def ResNet1d(inputs, blocks, block, include_top=True, classes=1000, freeze_bn=Tr
         numerical_names = [True] * len(blocks)
 
     x = keras.layers.ZeroPadding1D(padding=1, name="padding_conv1")(inputs)
-    x = keras.layers.Conv1D(64, (1, 1), strides=1,
+    x = keras.layers.Conv1D(64, (1), strides=1,
                             use_bias=False, name="conv1")(x)
     x = keras_resnet.layers.BatchNormalization(
         axis=axis, epsilon=1e-5, freeze=freeze_bn, name="bn_conv1")(x)
     x = keras.layers.Activation("relu", name="conv1_relu")(x)
     x = keras.layers.MaxPooling1D(
-        (1, 1), strides=1, padding="same", name="pool1")(x)
+        (1), strides=1, padding="same", name="pool1")(x)
 
     features = 64
 
     outputs = []
 
     for stage_id, iterations in enumerate(blocks):
+
         for block_id in range(iterations):
             x = block(features, stage_id, block_id, numerical_name=(
                 block_id > 0 and numerical_names[stage_id]), freeze_bn=freeze_bn)(x)
@@ -115,11 +116,11 @@ def ResNet18_1d(inputs, blocks=None, include_top=True, classes=1000, *args, **kw
 
         >>> import keras_resnet.models
 
-        >>> shape, classes = (224, 224, 3), 1000
+        >>> shape, classes = (1, 5), 2
 
         >>> x = keras.layers.Input(shape)
 
-        >>> model = keras_resnet.models.ResNet18(x, classes=classes)
+        >>> model = keras_resnet.models.ResNet18_1d(x, classes=classes)
 
         >>> model.compile("adam", "categorical_crossentropy", ["accuracy"])
     """

@@ -33,7 +33,7 @@ class ResNet18_1d(keras.models.Model):
         >>> model.compile("adam", "categorical_crossentropy", ["accuracy"])
     """
     def __init__(self, inputs, classes):
-        outputs = keras_resnet.models.ResNet18(inputs)
+        outputs = keras_resnet.models.ResNet18_1d(inputs)
 
         outputs = keras.layers.Flatten()(outputs.output)
 
