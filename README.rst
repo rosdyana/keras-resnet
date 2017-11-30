@@ -37,7 +37,7 @@ Installation couldn’t be easier:
 
 .. code-block:: bash
 
-    $ pip install keras-resnet
+    $ python setup.py install
 
 Contributing
 ------------
